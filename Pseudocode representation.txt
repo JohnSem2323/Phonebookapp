@@ -1,0 +1,107 @@
+// Define a Contact structure
+STRUCT Contact
+    STRING name
+    STRING phoneNumber
+
+// Initialize an empty list to store contacts
+LIST contacts
+
+// Function to insert a contact
+FUNCTION InsertContact(name, phoneNumber)
+    CREATE newContact AS Contact
+    newContact.name = name
+    newContact.phoneNumber = phoneNumber
+    APPEND newContact TO contacts
+
+// Function to search for a contact by name
+FUNCTION SearchContact(name)
+    FOR EACH contact IN contacts DO
+        IF contact.name == name THEN
+            RETURN contact
+    END FOR
+    RETURN "Contact not found"
+
+// Function to display all contacts
+FUNCTION DisplayAllContacts()
+    IF SIZE(contacts) == 0 THEN
+        PRINT "No contacts available"
+    ELSE
+        FOR EACH contact IN contacts DO
+            PRINT contact.name + ": " + contact.phoneNumber
+        END FOR
+    END IF
+
+// Function to delete a contact by name
+FUNCTION DeleteContact(name)
+    FOR i FROM 0 TO SIZE(contacts) - 1 DO
+        IF contacts[i].name == name THEN
+            REMOVE contacts[i] FROM contacts
+            RETURN "Contact deleted"
+    END FOR
+    RETURN "Contact not found"
+
+// Function to update a contact
+FUNCTION UpdateContact(name, newName, newPhoneNumber)
+    FOR EACH contact IN contacts DO
+        IF contact.name == name THEN
+            contact.name = newName
+            contact.phoneNumber = newPhoneNumber
+            RETURN "Contact updated"
+    END FOR
+    RETURN "Contact not found"
+
+// Optional function to sort contacts by name
+FUNCTION SortContacts()
+    SORT contacts BY contact.name
+
+// Function to analyze search efficiency
+FUNCTION AnalyzeSearchEfficiency(searchName)
+    START TIMER
+    result = SearchContact(searchName)
+    STOP TIMER
+    PRINT "Search took: " + ELAPSED TIME
+    RETURN result
+
+// Main program loop
+FUNCTION Main()
+    WHILE TRUE DO
+        PRINT "Choose an operation: "
+        PRINT "1. Insert Contact"
+        PRINT "2. Search Contact"
+        PRINT "3. Display All Contacts"
+        PRINT "4. Delete Contact"
+        PRINT "5. Update Contact"
+        PRINT "6. Sort Contacts"
+        PRINT "7. Analyze Search Efficiency"
+        PRINT "8. Exit"
+        INPUT choice
+
+        SWITCH choice DO
+            CASE 1:
+                INPUT name, phoneNumber
+                InsertContact(name, phoneNumber)
+                PRINT "Contact inserted."
+            CASE 2:
+                INPUT name
+                PRINT SearchContact(name)
+            CASE 3:
+                DisplayAllContacts()
+            CASE 4:
+                INPUT name
+                PRINT DeleteContact(name)
+            CASE 5:
+                INPUT name, newName, newPhoneNumber
+                PRINT UpdateContact(name, newName, newPhoneNumber)
+            CASE 6:
+                SortContacts()
+                PRINT "Contacts sorted."
+            CASE 7:
+                INPUT name
+                PRINT AnalyzeSearchEfficiency(name)
+            CASE 8:
+                BREAK
+            DEFAULT:
+                PRINT "Invalid choice. Please try again."
+        END SWITCH
+    END WHILE
+END FUNCTION
