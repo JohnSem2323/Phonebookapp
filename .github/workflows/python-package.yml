@@ -1,7 +1,41 @@
-            - name: Code Runner Action
-  # You may pin to the exact commit or the version.
-  # uses: anuraghazra/code-runner-action@c6ba62561b3df66a584630854a62a3191cffb7fa
-  uses: anuraghazra/code-runner-action@v1
+class Contact:
+    def __init__(self, name, phone):
+        self.name = name
+        self.phone = phone
+
+class Phonebook:
+    def __init__(self):
+        self.contacts = []
+
+    def insert_contact(self, contact):
+        self.contacts.append(contact)
+
+    def search_contact(self, name):
+        for contact in self.contacts:
+            if contact.name == name:
+                return contact
+        return None
+
+    def display_all_contacts(self):
+        for contact in self.contacts:
+            print(f"{contact.name}: {contact.phone}")
+
+    def delete_contact(self, name):
+        for contact in self.contacts:
+            if contact.name == name:
+                self.contacts.remove(contact)
+                return True
+        return False
+
+    def update_contact(self, name, new_contact):
+        for index, contact in enumerate(self.contacts):
+            if contact.name == name:
+                self.contacts[index] = new_contact
+                return True
+        return False
+
+    def sort_contacts(self):
+        self.contacts.sort(key=lambda c: c.name)
 
           
 
