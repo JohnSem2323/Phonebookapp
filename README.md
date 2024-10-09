@@ -43,3 +43,12 @@ A confirmation message will appear, and the program will terminate.
 Tips:
 Ensure that you enter valid names and phone numbers when prompted.
 The phonebook has a maximum capacity of 100 contacts. If you reach this limit, you won’t be able to add more contacts until some are deleted.# Phonebookapp
+
+Explanation of Modules/Functions
+InsertContact: Adds a new contact to the list.
+SearchContact: Searches for a contact by name and returns it.
+DisplayAllContacts: Prints all contacts in the list.
+DeleteContact: Removes a contact by name.
+UpdateContact: Modifies the details of an existing contact.
+SortContacts: Sorts the contacts alphabetically by name (optional).
+AnalyzeSearchEfficiency: Measures the time taken for a search operation.
